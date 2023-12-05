@@ -4,7 +4,7 @@ using Konsollapp_adressbok.Interface;
 
 namespace Konsollapp_adressbok.Models;
 
-internal class Address : IAddress
+internal class AddressModel : IAddress
 {
     public string StreetName { get; set; } = null!;
     public string PostalCode { get; set; } = null!;

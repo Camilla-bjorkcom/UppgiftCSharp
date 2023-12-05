@@ -8,6 +8,8 @@ internal class MenuService : IMenuService
 {
     public void ShowMainMenu()
     {
+        PersonService personService = new PersonService();
+
        while (true)
         {
             Console.WriteLine();
@@ -22,10 +24,10 @@ internal class MenuService : IMenuService
             switch (option)
             {
                 case "1":
-                    // ShowAllContacts();
+                    personService.ShowAllContacts();
                     break;
                 case "2":
-                    // AddNewContact();
+                    personService.AddNewContact();
                     break;
                 default:
                     Console.WriteLine("Du har angivit ett ogiltig val");
@@ -34,7 +36,7 @@ internal class MenuService : IMenuService
         }
     }
 
-    private void DisplayMenuTitle(string title)
+   public void DisplayMenuTitle(string title)
     {
         Console.Clear();
         Console.WriteLine($"###### {title} ######");
