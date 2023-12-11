@@ -3,7 +3,7 @@ using Konsollapp_adressbok.Interface;
 
 namespace Konsollapp_adressbok.Models;
 
-internal class PersonModel : IPerson
+public class PersonModel : IPerson
 {
     
     //Tom konstruktor
@@ -18,9 +18,9 @@ internal class PersonModel : IPerson
 
     public int Id { get; set; }
 
-    public AddressModel YourAddress { get; set; } = null!;
+    public AddressModel YourAddress { get; set; } = new AddressModel();
 
-    public ContactInformationModel YourContactInformation { get; set; } = null!;
+    public ContactInformationModel YourContactInformation { get; set; } = new ContactInformationModel();
 
 
 }

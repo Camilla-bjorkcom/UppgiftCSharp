@@ -11,22 +11,18 @@ using System.Runtime.CompilerServices;
 
 namespace Konsollapp_adressbok.Services;
 
-internal class PersonService
+
+public class PersonService : IPersonService
 {
-    private readonly List<IPerson> contactList = new List<IPerson>();
-    private readonly FileService _fileService = new FileService(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
-    public void AddNewContact()
+
+    private List<IPerson> _contactList = new List<IPerson>();
+    private readonly IFileService _fileService = new FileService(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
+  
+    public IServiceResult AddNewContact()
     {
-        PersonModel person = new PersonModel();
-        AddressModel address = new AddressModel();
-        person.YourAddress = address;
+        IServiceResult response = new ServiceResult();
+        IPerson person = new PersonModel();
 
-        ContactInformationModel contactInfo = new ContactInformationModel();
-        person.YourContactInformation = contactInfo;
-
-
-
-        person.Id = contactList.Count + 1;
 
         Console.Write("Skriv in förnamn: ");
         person.FirstName = Console.ReadLine()!;
@@ -52,45 +48,145 @@ internal class PersonService
         Console.Write("Skriv in land: ");
         person.YourAddress.Country = Console.ReadLine()!;
 
-
-        AddPersonToList(person);
-        
-
+       
+        var result = AddPersonToList(person);
+        if (result.Status == Enums.ServiceStatus.SUCCEDED)
+        {
+            Console.WriteLine("The person was added successfully");
+            person.Id = _contactList.Count + 1;
+            response.Status = Enums.ServiceStatus.SUCCEDED;
+        }
+        else if (result.Status == Enums.ServiceStatus.ALREADY_EXISTS)
+        {
+            Console.WriteLine("The person already exists in contactlist");
+        }
+        else
+        {
+            Console.WriteLine("Failed when trying to add the person to the list");
+            Console.WriteLine("See error message :: " + result.Result.ToString());
+        }
+        Console.ReadKey();
+        return response;
 
     }
 
-
-    
-
-    public void AddPersonToList(IPerson person)
+    public IServiceResult DeleteContactFromList(string targetEmail)
     {
+        IServiceResult response = new ServiceResult();
+        IPerson person = new PersonModel();
 
+
+        _contactList.RemoveAll(person => person.YourContactInformation.Email == targetEmail);
+        response.Status = Enums.ServiceStatus.SUCCEDED;
+        
+        return response;
+    }
+
+    public IServiceResult ShowAContactFromList(int targetId)
+    {
+        IServiceResult response = new ServiceResult();
+        {
+            foreach (var person in _contactList)
+            {
+                if (person.Id == targetId)
+                {
+                    Console.WriteLine($"Detaljer för person med ID {targetId}:");
+                    Console.WriteLine($"Namn: {person.FirstName} {person.LastName}");
+                    Console.WriteLine($"Adress: {person.YourAddress.StreetName} {person.YourAddress.PostalCode} {person.YourAddress.Country}");
+                    Console.WriteLine($"Telefon: {person.YourContactInformation.PhoneNumber}");
+                    Console.WriteLine($"E-post: {person.YourContactInformation.Email}");
+                    // Lägg till ytterligare information om det behövs
+                }
+                else
+                {
+                    Console.WriteLine($"Person med ID {targetId} hittades inte.");
+                }
+            }
+        }
+
+        return response;
+    }
+
+    public IServiceResult ShowAllContacts()
+    {
+        IServiceResult response = new ServiceResult();
 
         try
         {
-               contactList.Add(person);
-               _fileService.SaveContentToFile(JsonConvert.SerializeObject(contactList));
-         }
- 
+            if (_contactList != null)
+            {
+
+                foreach (var contact in _contactList.Distinct())
+                {
+                    Console.WriteLine($"Kontakt: {contact.Id}");
+                    Console.WriteLine($"Namn: {contact.FirstName} {contact.LastName}");
+                    Console.WriteLine(); // Tom rad för att separera varje kontakt i utskriften
+                }
+                Console.ReadKey();
+                response.Status = Enums.ServiceStatus.SUCCEDED;
+                response.Result = _contactList;
+
+                Console.WriteLine("Skriv in numret på kontakten för att se detaljerad information: ");
+                int.TryParse(Console.ReadLine(), out int targetId);
+
+                ShowAContactFromList(targetId);
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("no person in the list");
+            }
+
+        }
 
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
-    
+            response.Status = Enums.ServiceStatus.FAILED;
+            //skickar med felmeddelandet
+            response.Result = ex.Message;
+
         }
-    
+        return response;
+
     }
 
 
-    public void ShowAllContacts()
+    public IServiceResult AddPersonToList(IPerson person)
     {
-        foreach (var contact in contactList)
+        IServiceResult response = new ServiceResult();
+        try
         {
-            Console.WriteLine($"Kontakt: {contact.FirstName} {contact.LastName} {contact.Id} {contact.YourAddress.StreetName}");
+            if (!_contactList.Any(x => x.YourContactInformation.Email == person.YourContactInformation.Email))
+            {
+            _contactList.Add(person);
+            _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
+                response.Status = Enums.ServiceStatus.SUCCEDED;
+            }
+
+            else
+            {
+                response.Status = Enums.ServiceStatus.ALREADY_EXISTS;
+            }
+
         }
-        Console.ReadKey();
-        
+
+
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            response.Status = Enums.ServiceStatus.FAILED;
+            //skickar med felmeddelandet
+            response.Result = ex.Message;
+
+        }
+
+        return response;
+
     }
+
+
+
 
     //public IEnumerable<PersonModel> ShowAllContacts() 
     //{ 

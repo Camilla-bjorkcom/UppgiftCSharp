@@ -1,6 +1,6 @@
 ﻿namespace Konsollapp_adressbok.Interface;
 
-internal interface IAddress
+public interface IAddress
 {
     string City { get; set; }
     string Country { get; set; }
