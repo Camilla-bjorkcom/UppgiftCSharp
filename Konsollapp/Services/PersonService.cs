@@ -113,7 +113,7 @@ public class PersonService : IPersonService
 
         try
         {
-            if (_contactList != null)
+            if (_contactList.Count != 0)
             {
 
                 foreach (var contact in _contactList.Distinct())
@@ -132,9 +132,10 @@ public class PersonService : IPersonService
                 ShowAContactFromList(targetId);
                 Console.ReadKey();
             }
-            else
+            else 
             {
-                Console.WriteLine("no person in the list");
+                Console.WriteLine("No person in the list");
+                Console.ReadKey();
             }
 
         }
@@ -162,11 +163,15 @@ public class PersonService : IPersonService
             _contactList.Add(person);
             _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
                 response.Status = Enums.ServiceStatus.SUCCEDED;
+                Console.WriteLine("Sparat ned i listan");
+                Console.ReadKey();
             }
 
             else
             {
                 response.Status = Enums.ServiceStatus.ALREADY_EXISTS;
+                Console.WriteLine("Already Exists");
+                Console.ReadKey();
             }
 
         }
@@ -185,12 +190,26 @@ public class PersonService : IPersonService
 
     }
 
+    public  IEnumerable<IPerson> GetPersonList()
+    {
+       
+        try
+        {
+            var content = _fileService.GetContentFromFile();
+            if (!string.IsNullOrEmpty(content))
+            {
+                _contactList = JsonConvert.DeserializeObject<List<PersonModel>>(content);
+            }
+           
+        }
+
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+        return _contactList;
+    }
 
 
-
-    //public IEnumerable<PersonModel> ShowAllContacts() 
-    //{ 
-    //    return contactList;
-    //}
 
 }

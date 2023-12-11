@@ -10,13 +10,23 @@ public class MenuService : IMenuService
     private readonly IPersonService _personService = new PersonService();
 
     //Läser in alla kontakter när programmet startas
-    IEnumerable<IFileService> _files = [];
-     
+    
+
+  
+
     public void ShowMainMenu()
     {
-        
 
-       while (true)
+        var list = _personService.GetPersonList();
+        foreach (var p in list)
+        {
+            Console.WriteLine($"{p.FirstName} {p.LastName}");
+            Console.ReadKey();
+        }
+        Console.ReadKey();
+
+
+        while (true)
         {
             Console.WriteLine();
             DisplayMenuTitle("Din Adressbok");

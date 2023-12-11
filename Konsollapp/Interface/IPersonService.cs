@@ -9,4 +9,6 @@ public interface IPersonService
     IServiceResult ShowAContactFromList(int targetId);
     IServiceResult ShowAllContacts();
     IServiceResult AddPersonToList(IPerson person);
+
+    IEnumerable<IPerson> GetPersonList();
 }
