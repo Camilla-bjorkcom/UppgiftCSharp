@@ -17,15 +17,6 @@ public class MenuService : IMenuService
     public void ShowMainMenu()
     {
 
-        var list = _personService.GetPersonList();
-        foreach (var p in list)
-        {
-            Console.WriteLine($"{p.FirstName} {p.LastName}");
-            Console.ReadKey();
-        }
-        Console.ReadKey();
-
-
         while (true)
         {
             Console.WriteLine();

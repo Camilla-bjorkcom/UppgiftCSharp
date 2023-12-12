@@ -14,12 +14,15 @@ namespace Konsollapp_adressbok.Repository;
 public class PersonRepository
 {
     public List<IPerson> _contactList = new List<IPerson>();
-    private readonly IPersonService _personService;
 
-    public PersonRepository(IPersonService personService)
+    private readonly IFileService _fileService;
+
+    public PersonRepository(IFileService fileService)
     {
-        _personService = personService;
+        _fileService = fileService;
     }
+
+  
 
     public IServiceResult AddToList (IPerson person)
     {
@@ -31,7 +34,7 @@ public class PersonRepository
             {
                 _contactList.Add(person);
                 person.Id = _contactList.Count + 1;
-                _personService.SaveToFile();
+                SaveToFile();
 
                 Console.WriteLine("The person was added successfully");
 
@@ -60,6 +63,40 @@ public class PersonRepository
 
     }
 
-    
+
+
+    public IEnumerable<IPerson> GetPersonList()
+    {
+
+        try
+        {
+            var content = _fileService.GetContentFromFile(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
+            if (!string.IsNullOrEmpty(content))
+            {
+                _contactList = JsonConvert.DeserializeObject<List<IPerson>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
+                return _contactList;
+            }
+
+        }
+
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+        return null!;
+    }
+
+    public void SaveToFile()
+    {
+        IServiceResult response = new ServiceResult();
+        _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList, new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All
+        }), @"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
+        response.Status = Enums.ServiceStatus.SUCCEDED;
+        Console.WriteLine("Sparat ned i listan");
+        Console.ReadKey();
+    }
+
 }
 

@@ -22,14 +22,7 @@ public class PersonService : IPersonService
         _personRepository = personRepository;
     }
 
-    //private List<IPerson> _contactList = new List<IPerson>();
-    private readonly IFileService _fileService;
-
-    public PersonService(IFileService fileService)
-    {
-        _fileService = fileService;
-    }
-
+   
     public void AddNewContact()
     {
         IServiceResult response = new ServiceResult();
@@ -63,16 +56,20 @@ public class PersonService : IPersonService
        _personRepository.AddToList(person);
 
     }
-    public void SaveToFile()
-    {
-        IServiceResult response = new ServiceResult();
-        _fileService.SaveContentToFile(JsonConvert.SerializeObject(_personRepository._contactList, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All
-}),@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
-                response.Status = Enums.ServiceStatus.SUCCEDED;
-                Console.WriteLine("Sparat ned i listan");
-                Console.ReadKey();
-    }
-   
+
+    //public void SaveToFile()
+    //{
+    //    IServiceResult response = new ServiceResult();
+    //    _fileService.SaveContentToFile(JsonConvert.SerializeObject(_personRepository._contactList, new JsonSerializerSettings
+    //    {
+    //        TypeNameHandling = TypeNameHandling.All
+    //    }), @"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
+    //    response.Status = Enums.ServiceStatus.SUCCEDED;
+    //    Console.WriteLine("Sparat ned i listan");
+    //    Console.ReadKey();
+    //}
+
+
 
     public IServiceResult DeleteContactFromList(string targetEmail)
     {
@@ -157,26 +154,26 @@ public class PersonService : IPersonService
     }
 
 
-    public  IEnumerable<IPerson> GetPersonList()
-    {
+    //public  IEnumerable<IPerson> GetPersonList()
+    //{
        
-        try
-        {
-            var content = _fileService.GetContentFromFile(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
-            if (!string.IsNullOrEmpty(content))
-            {
-                _personRepository._contactList = JsonConvert.DeserializeObject<List<IPerson>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All})!;
-                return _personRepository._contactList;
-            }
+    //    try
+    //    {
+    //        var content = _fileService.GetContentFromFile(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
+    //        if (!string.IsNullOrEmpty(content))
+    //        {
+    //            _personRepository._contactList = JsonConvert.DeserializeObject<List<IPerson>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All})!;
+    //            return _personRepository._contactList;
+    //        }
            
-        }
+    //    }
 
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-        }
-        return null!;
-    }
+    //    catch (Exception ex)
+    //    {
+    //        Debug.WriteLine(ex.Message);
+    //    }
+    //    return null!;
+    //}
 
 
 
