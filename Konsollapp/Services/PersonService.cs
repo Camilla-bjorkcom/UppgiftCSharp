@@ -2,6 +2,7 @@
 
 using Konsollapp_adressbok.Interface;
 using Konsollapp_adressbok.Models;
+using Konsollapp_adressbok.Repository;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
@@ -14,11 +15,22 @@ namespace Konsollapp_adressbok.Services;
 
 public class PersonService : IPersonService
 {
+    private readonly PersonRepository _personRepository;
 
-    private List<IPerson> _contactList = new List<IPerson>();
-    private readonly IFileService _fileService = new FileService(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
-  
-    public IServiceResult AddNewContact()
+    public PersonService(PersonRepository personRepository)
+    {
+        _personRepository = personRepository;
+    }
+
+    //private List<IPerson> _contactList = new List<IPerson>();
+    private readonly IFileService _fileService;
+
+    public PersonService(IFileService fileService)
+    {
+        _fileService = fileService;
+    }
+
+    public void AddNewContact()
     {
         IServiceResult response = new ServiceResult();
         IPerson person = new PersonModel();
@@ -48,27 +60,19 @@ public class PersonService : IPersonService
         Console.Write("Skriv in land: ");
         person.YourAddress.Country = Console.ReadLine()!;
 
-       
-        var result = AddPersonToList(person);
-        if (result.Status == Enums.ServiceStatus.SUCCEDED)
-        {
-            Console.WriteLine("The person was added successfully");
-            person.Id = _contactList.Count + 1;
-            response.Status = Enums.ServiceStatus.SUCCEDED;
-        }
-        else if (result.Status == Enums.ServiceStatus.ALREADY_EXISTS)
-        {
-            Console.WriteLine("The person already exists in contactlist");
-        }
-        else
-        {
-            Console.WriteLine("Failed when trying to add the person to the list");
-            Console.WriteLine("See error message :: " + result.Result.ToString());
-        }
-        Console.ReadKey();
-        return response;
+       _personRepository.AddToList(person);
 
     }
+    public void SaveToFile()
+    {
+        IServiceResult response = new ServiceResult();
+        _fileService.SaveContentToFile(JsonConvert.SerializeObject(_personRepository._contactList, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All
+}),@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
+                response.Status = Enums.ServiceStatus.SUCCEDED;
+                Console.WriteLine("Sparat ned i listan");
+                Console.ReadKey();
+    }
+   
 
     public IServiceResult DeleteContactFromList(string targetEmail)
     {
@@ -76,7 +80,7 @@ public class PersonService : IPersonService
         IPerson person = new PersonModel();
 
 
-        _contactList.RemoveAll(person => person.YourContactInformation.Email == targetEmail);
+        _personRepository._contactList.RemoveAll(person => person.YourContactInformation.Email == targetEmail);
         response.Status = Enums.ServiceStatus.SUCCEDED;
         
         return response;
@@ -86,7 +90,7 @@ public class PersonService : IPersonService
     {
         IServiceResult response = new ServiceResult();
         {
-            foreach (var person in _contactList)
+            foreach (var person in _personRepository._contactList)
             {
                 if (person.Id == targetId)
                 {
@@ -113,10 +117,10 @@ public class PersonService : IPersonService
 
         try
         {
-            if (_contactList.Count != 0)
+            if (_personRepository._contactList.Count != 0)
             {
 
-                foreach (var contact in _contactList.Distinct())
+                foreach (var contact in _personRepository._contactList.Distinct())
                 {
                     Console.WriteLine($"Kontakt: {contact.Id}");
                     Console.WriteLine($"Namn: {contact.FirstName} {contact.LastName}");
@@ -124,7 +128,7 @@ public class PersonService : IPersonService
                 }
                 Console.ReadKey();
                 response.Status = Enums.ServiceStatus.SUCCEDED;
-                response.Result = _contactList;
+                response.Result = _personRepository._contactList;
 
                 Console.WriteLine("Skriv in numret på kontakten för att se detaljerad information: ");
                 int.TryParse(Console.ReadLine(), out int targetId);
@@ -153,52 +157,16 @@ public class PersonService : IPersonService
     }
 
 
-    public IServiceResult AddPersonToList(IPerson person)
-    {
-        IServiceResult response = new ServiceResult();
-        try
-        {
-            if (!_contactList.Any(x => x.YourContactInformation.Email == person.YourContactInformation.Email))
-            {
-            _contactList.Add(person);
-            _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
-                response.Status = Enums.ServiceStatus.SUCCEDED;
-                Console.WriteLine("Sparat ned i listan");
-                Console.ReadKey();
-            }
-
-            else
-            {
-                response.Status = Enums.ServiceStatus.ALREADY_EXISTS;
-                Console.WriteLine("Already Exists");
-                Console.ReadKey();
-            }
-
-        }
-
-
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-            response.Status = Enums.ServiceStatus.FAILED;
-            //skickar med felmeddelandet
-            response.Result = ex.Message;
-
-        }
-
-        return response;
-
-    }
-
     public  IEnumerable<IPerson> GetPersonList()
     {
        
         try
         {
-            var content = _fileService.GetContentFromFile();
+            var content = _fileService.GetContentFromFile(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
             if (!string.IsNullOrEmpty(content))
             {
-                _contactList = JsonConvert.DeserializeObject<List<PersonModel>>(content);
+                _personRepository._contactList = JsonConvert.DeserializeObject<List<IPerson>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All})!;
+                return _personRepository._contactList;
             }
            
         }
@@ -207,7 +175,7 @@ public class PersonService : IPersonService
         {
             Debug.WriteLine(ex.Message);
         }
-        return _contactList;
+        return null!;
     }
 
 

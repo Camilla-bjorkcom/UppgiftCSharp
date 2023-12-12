@@ -1,5 +1,5 @@
 ﻿using Konsollapp_adressbok.Interface;
-using Konsollapp_adressbok.Repositories;
+using Konsollapp_adressbok.Repository;
 using Konsollapp_adressbok.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,5 +19,3 @@ Console.Clear();
 
 IMenuService menuService = builder.Services.GetRequiredService<IMenuService>();
 menuService.ShowMainMenu();
-
-IFileService fileService = builder.Services.GetRequiredService<IFileService>();

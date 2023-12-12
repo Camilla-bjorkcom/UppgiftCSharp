@@ -5,18 +5,15 @@ using System.Diagnostics;
 using Konsollapp_adressbok.Interface;
 namespace Konsollapp_adressbok.Services;
 
-public class FileService(string filePath) : IFileService
+public class FileService : IFileService
 {
-    private readonly string _filePath = filePath;
-
-
-    public string GetContentFromFile()
+    public string GetContentFromFile(string filePath)
     {
         try
         {
-            if (File.Exists(_filePath))
+            if (File.Exists(filePath))
             {
-                using (var sr = new StreamReader(_filePath))
+                using (var sr = new StreamReader(filePath))
                 {
                     return sr.ReadToEnd();
                 }
@@ -29,11 +26,11 @@ public class FileService(string filePath) : IFileService
         }
     }
 
-    public bool SaveContentToFile(string content)
+    public bool SaveContentToFile(string content, string filePath)
     {
         try
         {
-            using (var sw = new StreamWriter(_filePath))
+            using (var sw = new StreamWriter(filePath))
             {
                 sw.WriteLine(content);
             }

@@ -4,11 +4,11 @@ namespace Konsollapp_adressbok.Interface;
 
 public interface IPersonService
 {
-    IServiceResult AddNewContact();
+   public void AddNewContact();
+    public void SaveToFile();
     IServiceResult DeleteContactFromList(string targetEmail);
     IServiceResult ShowAContactFromList(int targetId);
     IServiceResult ShowAllContacts();
-    IServiceResult AddPersonToList(IPerson person);
 
     IEnumerable<IPerson> GetPersonList();
 }

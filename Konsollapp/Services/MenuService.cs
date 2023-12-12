@@ -7,12 +7,12 @@ namespace Konsollapp_adressbok.Services;
 
 public class MenuService : IMenuService
 {
-    private readonly IPersonService _personService = new PersonService();
+    private readonly IPersonService _personService;
 
-    //Läser in alla kontakter när programmet startas
-    
-
-  
+    public MenuService(IPersonService personService)
+    {
+        _personService = personService;
+    }
 
     public void ShowMainMenu()
     {
