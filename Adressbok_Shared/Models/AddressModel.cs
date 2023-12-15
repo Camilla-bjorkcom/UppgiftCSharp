@@ -1,8 +1,11 @@
-﻿
+﻿using Adressbok_Shared.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-using Konsollapp_adressbok.Interface;
-
-namespace Konsollapp_adressbok.Models;
+namespace Adressbok_Shared.Models;
 
 public class AddressModel : IAddress
 {
@@ -12,3 +15,4 @@ public class AddressModel : IAddress
     public string Country { get; set; } = null!;
 
 }
+

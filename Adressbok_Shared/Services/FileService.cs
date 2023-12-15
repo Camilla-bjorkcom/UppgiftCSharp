@@ -1,9 +1,7 @@
-﻿
-
-using static Konsollapp_adressbok.Services.FileService;
+﻿using Adressbok_Shared.Interface;
 using System.Diagnostics;
-using Konsollapp_adressbok.Interface;
-namespace Konsollapp_adressbok.Services;
+
+namespace Adressbok_Shared.Services;
 
 public class FileService : IFileService
 {
@@ -43,4 +41,3 @@ public class FileService : IFileService
         }
     }
 }
-

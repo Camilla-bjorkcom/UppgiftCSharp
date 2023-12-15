@@ -1,4 +1,5 @@
-﻿namespace Konsollapp_adressbok.Enums;
+﻿
+namespace Adressbok_Shared.Enums;
 
 public enum ServiceStatus
 {

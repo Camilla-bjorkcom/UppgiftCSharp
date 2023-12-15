@@ -1,11 +1,11 @@
-﻿
-using Konsollapp_adressbok.Interface;
+﻿using Adressbok_Shared.Interface;
 
-namespace Konsollapp_adressbok.Models;
+
+namespace Adressbok_Shared.Models;
 
 public class PersonModel : IPerson
 {
-    
+
     //Tom konstruktor
     public PersonModel()
     {
