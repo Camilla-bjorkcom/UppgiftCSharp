@@ -1,0 +1,94 @@
+﻿<Window x:Class="Adressbok_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Adressbok_App"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Adressbok" Height="800" Width="350">
+    
+    
+    <Grid Margin="20,20,20,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Din adressbok" Grid.Row="0" Margin="0,0,0,10" FontSize="20" Foreground="#656588" FontWeight="ExtraBold"/>
+
+        <StackPanel Grid.Row="1" >
+            <Label Content="Skriv in förnamn:" />
+            <TextBox x:Name="Input_FirstName" Padding="2,5" Text="" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" >
+            <Label Content="Skriv in efternamn:" />
+            <TextBox x:Name="Input_LastName" Padding="2,5" Text="" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" >
+            <Label Content="Skriv in email:" />
+            <TextBox x:Name="Input_Email" Padding="2,5" Text="" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" >
+            <Label Content="Skriv in telefonnummer:" />
+            <TextBox x:Name="Input_PhoneNumber" Padding="2,5" Text="" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" >
+            <Label Content="Skriv in gatuadress:" />
+            <TextBox x:Name="Input_StreetName" Padding="2,5" Text="" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" >
+            <Label Content="Skriv in postnummer:" />
+            <TextBox x:Name="Input_PostalCode" Padding="2,5" Text="" Margin="0,0,0,10"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="7" >
+            <Label Content="Skriv in postort:" />
+            <TextBox x:Name="Input_City" Padding="2,5" Text="" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="8" Margin="0,0,0,20">
+            <Label Content="Skriv in land:" />
+            <TextBox x:Name="Input_Country" Padding="2,5" Text="" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="9">
+            <Button x:Name="BtnAdd" Content="Lägg till" Padding="0,5" Click="BtnAdd_Click" Background="#656588" Foreground="White"/>
+        </StackPanel>
+
+
+
+
+
+        <ListView x:Name="List_Contacts" Grid.Row="10" Margin="0,50,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto" />
+
+                        </Grid.ColumnDefinitions> 
+                        
+                        <TextBlock Grid.Column="0" Text="{Binding .}" Margin="0,5" />
+                    </Grid>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </Grid>
+</Window>
