@@ -4,6 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Adressbok_App"
+    
+        xmlns:viewmodels="clr-namespace:Adressbok_App.Mvvm.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+  
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Adressbok" Height="800" Width="350">
@@ -66,7 +70,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="9">
-            <Button x:Name="BtnAdd" Content="Lägg till" Padding="0,5" Click="BtnAdd_Click" Background="#656588" Foreground="White"/>
+            <Button x:Name="BtnAdd" Content="Lägg till" Padding="0,5" Command="" Background="#656588" Foreground="White"/>
         </StackPanel>
 
 
