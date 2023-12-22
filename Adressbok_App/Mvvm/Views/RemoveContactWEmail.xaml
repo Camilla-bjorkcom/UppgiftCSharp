@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Adressbok_App.Mvvm.Views.RemoveContactWEmail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Adressbok_App.Mvvm.Views"
+              xmlns:viewmodels="clr-namespace:Adressbok_App.Mvvm.ViewModels"
+                 xmlns:models="clr-namespace:Adressbok_App.Mvvm.Models"
+                    xmlns:services="clr-namespace:Adressbok_App.Services"
+  d:DataContext="{d:DesignInstance Type=viewmodels:ContactRemoveListViewModel}"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="350">
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Skriv in korrekt e-postadress för att ta bort kontakt:" />
+            <TextBox x:Name="Input_Email" Padding="2,5" Text="{Binding ContactForm.Email}" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Ta bort kontakt" Padding="0,5"  CommandParameter="{Binding ContactForm.Email}" Command="{Binding RemoveContactCommand}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Gå tillbaka till listan" Padding="0,5" Margin="0,20,0,0"  Command="{Binding NavigateToListCommand}"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

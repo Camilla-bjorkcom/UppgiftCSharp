@@ -1,5 +1,9 @@
 ﻿
+using Adressbok_App.Mvvm.Models;
 using Adressbok_App.Mvvm.ViewModels;
+using Adressbok_App.Mvvm.Views;
+using Adressbok_App.Services;
+using Adressbok_Shared.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
@@ -16,8 +20,28 @@ public partial class App : Application
         builder = Host.CreateDefaultBuilder()
             .ConfigureServices (services =>
             {
-                services.AddSingleton<MainWindow>();
                 services.AddSingleton<MainViewModel>();
+                services.AddSingleton<MainWindow>();
+               
+                services.AddTransient<Contact>();
+                services.AddSingleton<ContactService>();
+
+                services.AddTransient<ContactListViewModel>();
+                services.AddTransient<ContactListView>();
+
+                services.AddTransient<ContactAddListViewModel>();
+                services.AddTransient<ContactAddView>();
+
+                services.AddTransient<EditContactView>();
+                services.AddTransient<ContactEditListViewModel>();
+
+                services.AddTransient<RemoveContactWEmail>();
+                services.AddTransient<ContactRemoveListViewModel>();
+
+                services.AddTransient<FileService>();
+
+                services.AddTransient<ContactDetailsViewModel>();
+                services.AddTransient<ContactDetailsView>();
             })
             .Build();
     }
