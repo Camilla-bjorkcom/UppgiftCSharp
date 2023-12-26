@@ -25,6 +25,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
 
@@ -37,45 +38,50 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" >
-            <Label Content="Förnamn:" />
+            <Label Content="Förnamn:" FontWeight="Bold" />
             <TextBlock x:Name="Input_FirstName" Padding="2,5" Text="{Binding Contact.FirstName}" Margin="2.5,0,0,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" >
-            <Label Content="Efternamn:" />
+            <Label Content="Efternamn:" FontWeight="Bold" />
             <TextBlock x:Name="Input_LastName" Padding="2,5" Text="{Binding Contact.LastName}" Margin="2.5,0,0,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" >
-            <Label Content="Email:" />
+            <Label Content="Email:" FontWeight="Bold"/>
             <TextBlock x:Name="Input_Email" Padding="2,5" Text="{Binding Contact.Email}" Margin="2.5,0,0,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="5" >
-            <Label Content="Telefonnummer:" />
+            <Label Content="Telefonnummer:" FontWeight="Bold"/>
             <TextBlock x:Name="Input_PhoneNumber" Padding="2,5" Text="{Binding Contact.Phone}" Margin="2.5,0,0,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="6" >
-            <Label Content="Gatuadress:" />
+            <Label Content="Gatuadress:" FontWeight="Bold"/>
             <TextBlock x:Name="Input_StreetName" Padding="2,5" Text="{Binding Contact.StreetName}" Margin="2.5,0,0,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="7" >
-            <Label Content="Postnummer:" />
+            <Label Content="Postnummer:" FontWeight="Bold"/>
             <TextBlock x:Name="Input_PostalCode" Padding="2,5" Text="{Binding Contact.PostalCode}" Margin="2.5,0,0,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="8" >
-            <Label Content="Postort:" />
-            <TextBlock x:Name="Input_City" Padding="2,5" Text="{Binding Contact.CityName}" Margin="2.5,0,0,30"/>
+            <Label Content="Postort:" FontWeight="Bold"/>
+            <TextBlock x:Name="Input_City" Padding="2,5" Text="{Binding Contact.CityName}" Margin="2.5,0,0,10"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="9">
-            <Button Content="Uppdatera kontakt" Padding="0,5" CommandParameter="{Binding Contact}" Command="{Binding NavigateToEditCommand}" Background="#656588" Foreground="White" Margin="0,0,0,20"/>
+        <StackPanel Grid.Row="9" >
+            <Label Content="Id:" FontWeight="Bold"/>
+            <TextBlock Padding="2,5" Text="{Binding Contact.Id}" Margin="2.5,0,0,30"/>
         </StackPanel>
 
         <StackPanel Grid.Row="10">
+            <Button Content="Uppdatera kontakt" Padding="0,5" CommandParameter="{Binding Contact}" Command="{Binding NavigateToEditCommand}" Background="#656588" Foreground="White" Margin="0,0,0,20"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="11">
             <Button Content="Ta bort kontakt" Padding="0,5"  Command="{Binding NavigateToRemoveContactFromListCommand }" Background="#656588" Foreground="White"/>
         </StackPanel>
 

@@ -22,7 +22,7 @@
 
         <StackPanel Grid.Row="0">
             <TextBlock Text="Skriv in korrekt e-postadress för att ta bort kontakt:" />
-            <TextBlock x:Name="Email" Padding="2,5" Text="{Binding ContactForm.Email}" Margin="0,0,0,10"/>
+            <TextBlock x:Name="Email" Padding="2,5" Text="{Binding ContactForm.Email}" Margin="0,0,0,10" FontWeight="Bold"/>
             <TextBox x:Name="Input_Email" Padding="2,5" Text="{Binding ContactForm.InputEmail}" Margin="0,0,0,10"/>
         </StackPanel>
 

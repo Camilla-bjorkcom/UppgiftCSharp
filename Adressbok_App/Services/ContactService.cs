@@ -26,9 +26,12 @@ public class ContactService
     {
         try
         {
-        _contacts.Add(contact);
-        contact.Id = _contacts.Count + 1;
-        SaveToFile();
+            if (!string.IsNullOrWhiteSpace(contact.FirstName) && !string.IsNullOrWhiteSpace(contact.Email))
+            {
+                     _contacts.Add(contact);
+                     SaveToFile();
+            }
+        
         }
 
         catch (Exception ex)
@@ -37,22 +40,27 @@ public class ContactService
         }
     }
 
+  
+
     public IEnumerable<Contact> GetAll()
     {
         try
         {
-            var content = _fileService.GetContentFromFile(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\contentApp.json");
-            if (!string.IsNullOrEmpty(content))
+            var content = _fileService.GetContentFromFile(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\contentApp1.json");
+            //if (!string.IsNullOrEmpty(content))
+                if (String.Empty != content)
             {
                 _contacts = JsonConvert.DeserializeObject<List<Contact>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
                 return _contacts;
             }
+
            
         }
 
         catch (Exception ex)
         {
-            Debug.WriteLine(ex.Message);
+           Debug.WriteLine(ex.Message);
+          
         }
         return null!;
     }
@@ -96,7 +104,7 @@ public void SaveToFile()
         _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contacts, new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All
-        }), @"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\contentApp.json");
+        }), @"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\contentApp1.json");
         
     }
 }

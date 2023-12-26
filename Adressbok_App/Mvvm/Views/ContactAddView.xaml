@@ -25,16 +25,15 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        
+
+
         <StackPanel Grid.Row="0">
-            <Label Content="Lägg till ny kontakt i adresbok" />
-            <Button Content="Gå till adressbok" Command="{Binding NavigateToListCommand}"/>
+            <Button Content="Gå tillbaka" Command="{Binding NavigateToListCommand}"  Margin="0,10,0,10"  HorizontalAlignment="left" Padding="5"/>
         </StackPanel>
 
 
         <StackPanel Grid.Row="1">
-            <TextBlock Text="Din adressbok" Margin="0,0,0,10" FontSize="20" Foreground="#656588" FontWeight="ExtraBold"/>
+            <Label Content="Lägg till en ny kontakt i adressboken" Margin="0,30,0,10" FontSize="15" Foreground="#656588" FontWeight="Bold" HorizontalAlignment="Center" />
         </StackPanel>
 
         <StackPanel Grid.Row="2" >
@@ -64,12 +63,12 @@
 
         <StackPanel Grid.Row="7" >
             <Label Content="Skriv in postnummer:" />
-            <TextBox x:Name="Input_PostalCode" Padding="2,5" Text="{Binding ContactForm.PostalCode}" Margin="0,0,0,20"/>
+            <TextBox x:Name="Input_PostalCode" Padding="2,5" Text="{Binding ContactForm.PostalCode}" Margin="0,0,0,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="8" >
             <Label Content="Skriv in postort:" />
-            <TextBox x:Name="Input_City" Padding="2,5" Text="{Binding ContactForm.CityName}" Margin="0,0,0,10"/>
+            <TextBox x:Name="Input_City" Padding="2,5" Text="{Binding ContactForm.CityName}" Margin="0,0,0,40"/>
         </StackPanel>
 
         <StackPanel Grid.Row="9">

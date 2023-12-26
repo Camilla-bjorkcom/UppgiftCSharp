@@ -19,7 +19,6 @@
 
         <StackPanel Grid.Row="0">
             <TextBlock Text="Din adressbok" Margin="0,0,0,10" FontSize="20" Foreground="#656588" FontWeight="ExtraBold"/>
-            <!--<Label Content="Tryck på kontakt för att se mer information" Margin="0,0,0,10"/>-->
         </StackPanel>
 
 
@@ -43,7 +42,7 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <TextBlock  Grid.Row="6" Text="{Binding Id}" Margin="0" FontSize="10" HorizontalAlignment="Center"/>
+                            <!--<TextBlock  Grid.Row="6" Text="{Binding Id}" Margin="0" FontSize="10" HorizontalAlignment="Center"/>-->
                             <TextBlock Grid.Row="0" Margin="0,5" FontWeight="ExtraBold">
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
@@ -52,18 +51,11 @@
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
-
-                            <!--<TextBlock  Grid.Row="1" Text="{Binding Email}" Margin="0,5" />
-                            <TextBlock  Grid.Row="2" Text="{Binding Phone}" Margin="0,5" />
-                            <TextBlock  Grid.Row="3" Text="{Binding StreetName}" Margin="0,5" />
-                            <TextBlock  Grid.Row="4" Text="{Binding PostalCode}" Margin="0,5" />
-                            <TextBlock  Grid.Row="5" Text="{Binding CityName}" Margin="0,5" />-->
-                            
                         </StackPanel>
 
                         <StackPanel>
                             <Button Content="Detaljer" CommandParameter="{Binding .}" Grid.Column="1" Command="{Binding Path=DataContext.NavigateToDetailsViewCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"  Width="50" Height="20"
-        HorizontalAlignment="Right"/>
+        HorizontalAlignment="Right" VerticalAlignment="Center" Background="PeachPuff"/>
                         </StackPanel>
 
 
