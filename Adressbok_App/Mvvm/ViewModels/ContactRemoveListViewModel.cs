@@ -16,6 +16,8 @@ public partial class ContactRemoveListViewModel : ObservableObject
     private readonly IServiceProvider _sp;
     private readonly ContactService _contactService;
 
+    public string Input_Email { get; set; } = null!;
+
     public ContactRemoveListViewModel(IServiceProvider sp, ContactService contactService)
     {
         _sp = sp;

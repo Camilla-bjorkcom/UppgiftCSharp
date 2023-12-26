@@ -18,4 +18,6 @@ public class Contact
     public string PostalCode { get; set; } = null!;
     public string CityName { get; set; } = null!; 
 
+    public string InputEmail { get; set; } = null!;
+
 }

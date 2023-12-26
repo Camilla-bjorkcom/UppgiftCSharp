@@ -22,11 +22,12 @@
 
         <StackPanel Grid.Row="0">
             <TextBlock Text="Skriv in korrekt e-postadress för att ta bort kontakt:" />
-            <TextBox x:Name="Input_Email" Padding="2,5" Text="{Binding ContactForm.Email}" Margin="0,0,0,10"/>
+            <TextBlock x:Name="Email" Padding="2,5" Text="{Binding ContactForm.Email}" Margin="0,0,0,10"/>
+            <TextBox x:Name="Input_Email" Padding="2,5" Text="{Binding ContactForm.InputEmail}" Margin="0,0,0,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Ta bort kontakt" Padding="0,5"  CommandParameter="{Binding ContactForm.Email}" Command="{Binding RemoveContactCommand}"/>
+            <Button Content="Ta bort kontakt" Padding="0,5"  CommandParameter="{Binding ContactForm.InputEmail}" Command="{Binding RemoveContactCommand}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
