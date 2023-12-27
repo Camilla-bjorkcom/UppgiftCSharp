@@ -1,12 +1,13 @@
 ﻿
 
-using Adressbok_App.Mvvm.Models;
-using Adressbok_Shared.Repository;
+
+using Adressbok_Shared.Models;
+using Adressbok_Shared.Services;
 using Newtonsoft.Json;
 
 using System.Diagnostics;
 
-namespace Adressbok_App.Services;
+namespace Adressbok_Shared.Services;
 
 public class ContactService 
 {

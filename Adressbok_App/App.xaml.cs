@@ -1,9 +1,9 @@
 ﻿
-using Adressbok_App.Mvvm.Models;
+
 using Adressbok_App.Mvvm.ViewModels;
 using Adressbok_App.Mvvm.Views;
-using Adressbok_App.Services;
 using Adressbok_Shared.Models;
+using Adressbok_Shared.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;

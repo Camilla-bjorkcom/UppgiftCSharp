@@ -1,13 +1,10 @@
-﻿using Adressbok_App.Mvvm.Models;
-using Adressbok_App.Services;
+﻿
+using Adressbok_Shared.Models;
+using Adressbok_Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Adressbok_App.Mvvm.ViewModels;
 

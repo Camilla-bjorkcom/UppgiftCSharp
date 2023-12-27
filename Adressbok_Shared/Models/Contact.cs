@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Adressbok_App.Mvvm.Models;
+namespace Adressbok_Shared.Models;
 
 public class Contact
 {

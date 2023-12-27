@@ -1,8 +1,8 @@
 ﻿
 
-using Adressbok_App.Mvvm.Models;
-using Adressbok_App.Services;
-using Adressbok_Shared.Repository;
+
+using Adressbok_Shared.Models;
+using Adressbok_Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;

@@ -9,13 +9,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Adressbok_Shared\Adressbok_Shared.csproj" />
+    <Compile Remove="Mvvm\Models\**" />
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Mvvm\Models\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Mvvm\Models\**" />
+    <None Remove="Services\**" />
+    <Page Remove="Mvvm\Models\**" />
+    <Page Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Adressbok_Shared\Adressbok_Shared.csproj" />
   </ItemGroup>
 
 </Project>

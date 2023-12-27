@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Adressbok_App.Mvvm.Views"
               xmlns:viewmodels="clr-namespace:Adressbok_App.Mvvm.ViewModels"
-                 xmlns:models="clr-namespace:Adressbok_App.Mvvm.Models"
-                    xmlns:services="clr-namespace:Adressbok_App.Services"
+                 xmlns:models="clr-namespace:Adressbok_Shared.Models;assembly=Adressbok_Shared"
+                    xmlns:services="clr-namespace:Adressbok_Shared.Services;assembly=Adressbok_Shared"
   d:DataContext="{d:DesignInstance Type=viewmodels:ContactRemoveListViewModel}"
              
              mc:Ignorable="d" 

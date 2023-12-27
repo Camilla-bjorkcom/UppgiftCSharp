@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Adressbok_App.Mvvm.Views"
              xmlns:viewmodels="clr-namespace:Adressbok_App.Mvvm.ViewModels"
-             xmlns:models="clr-namespace:Adressbok_App.Mvvm.Models"
+             xmlns:models="clr-namespace:Adressbok_Shared.Models;assembly=Adressbok_Shared"
              d:DataContext="{d:DesignInstance Type=viewmodels:ContactListViewModel}"
              
              mc:Ignorable="d" 
@@ -42,7 +42,6 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <!--<TextBlock  Grid.Row="6" Text="{Binding Id}" Margin="0" FontSize="10" HorizontalAlignment="Center"/>-->
                             <TextBlock Grid.Row="0" Margin="0,5" FontWeight="ExtraBold">
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">

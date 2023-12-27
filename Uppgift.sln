@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konsollapp_adressbok.Tests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adressbok_Shared", "Adressbok_Shared\Adressbok_Shared.csproj", "{05E8E776-8FCE-479C-A1E8-46A5BF01B24C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adressbok_App", "Adressbok_App\Adressbok_App.csproj", "{613BA570-3A1A-4D6C-BF0F-F5B29C211805}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adressbok_App", "Adressbok_App\Adressbok_App.csproj", "{613BA570-3A1A-4D6C-BF0F-F5B29C211805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adressbok_App.Tests", "Adressbok_App.Tests\Adressbok_App.Tests.csproj", "{C6C05581-E4C9-47EB-97B9-FC8A061EE133}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{613BA570-3A1A-4D6C-BF0F-F5B29C211805}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{613BA570-3A1A-4D6C-BF0F-F5B29C211805}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{613BA570-3A1A-4D6C-BF0F-F5B29C211805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C05581-E4C9-47EB-97B9-FC8A061EE133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C05581-E4C9-47EB-97B9-FC8A061EE133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C05581-E4C9-47EB-97B9-FC8A061EE133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C05581-E4C9-47EB-97B9-FC8A061EE133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
