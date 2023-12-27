@@ -14,12 +14,12 @@ public class FileService_Tests
     {
         //Arrange
         IFileService fileService = new FileService();
-        string filePath = @"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\tests.txt";
+        string filePath = @"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\test.txt";
         string content = "Test content";
         
 
         //Act
-        bool result = fileService.SaveContentToFile(filePath, content);
+        bool result = fileService.SaveContentToFile(content, filePath);
 
         //Assert
         Assert.True(result);
