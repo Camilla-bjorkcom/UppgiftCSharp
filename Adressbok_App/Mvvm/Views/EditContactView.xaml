@@ -36,8 +36,8 @@
                 <TextBlock Text="Uppdatera kontakt" Margin="0,0,0,10" FontSize="20" Foreground="#656588" FontWeight="ExtraBold"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="2" >
-                <Label Content="Skriv in förnamn:" />
+        <StackPanel Grid.Row="2" >
+            <Label Content="Skriv in förnamn: *" />
                 <TextBox x:Name="Input_FirstName" Padding="2,5" Text="{Binding ContactForm.FirstName}" Margin="0,0,0,10"/>
             </StackPanel>
 
@@ -47,7 +47,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="4" >
-                <Label Content="Skriv in email:" />
+                <Label Content="Skriv in email: *" />
                 <TextBox x:Name="Input_Email" Padding="2,5" Text="{Binding ContactForm.Email}" Margin="0,0,0,10"/>
             </StackPanel>
 

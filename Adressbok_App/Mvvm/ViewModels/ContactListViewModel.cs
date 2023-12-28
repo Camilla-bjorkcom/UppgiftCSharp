@@ -29,7 +29,12 @@ public partial class ContactListViewModel : ObservableObject
         _sp = sp;
         _contactService = contactService;
 
-        ContactList = new ObservableCollection<IContact>(_contactService.GetAll());
+        var result = _contactService.GetAll();
+        if (result != null)
+        {
+            ContactList = new ObservableCollection<IContact>(result);
+        }
+       
         _contact = _contactService.CurrentContact;
 
     }

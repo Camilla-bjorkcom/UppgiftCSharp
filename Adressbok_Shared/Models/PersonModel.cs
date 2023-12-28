@@ -13,14 +13,9 @@ public class PersonModel : IPerson
     }
 
     //Propertys till klassen
-    public string FirstName { get; set; } = null!;
-    public string LastName { get; set; } = null!;
-
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
     public int Id { get; set; }
-
-    public AddressModel YourAddress { get; set; } = new AddressModel();
-
-    public ContactInformationModel YourContactInformation { get; set; } = new ContactInformationModel();
-
-
+    public IAddress YourAddress { get; set; } = new AddressModel();  
+    public IContactInformation YourContactInformation { get; set; } = new ContactInformationModel();
 }

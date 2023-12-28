@@ -10,18 +10,21 @@ namespace Adressbok_Shared.Services;
 public class PersonService : IPersonService
 {
     private readonly PersonRepository _personRepository;
-
     public PersonService(PersonRepository personRepository)
     {
         _personRepository = personRepository;
+       
     }
 
-    private readonly IPerson _person;
 
+    private readonly IPerson _person;
     public PersonService(IPerson person)
     {
         _person = person;
     }
+
+
+
 
     public void AddNewContact()
     {
@@ -85,7 +88,7 @@ public class PersonService : IPersonService
         return response;
     }
 
-    public void ShowAContactFromList(int targetId)
+    public bool ShowAContactFromList(int targetId)
     {
 
         try
@@ -94,17 +97,21 @@ public class PersonService : IPersonService
             
             if (targetPerson != null)
             {
-
-                    Console.WriteLine($"Detaljer för person med ID {targetId}:");
-                    Console.WriteLine($"Namn: {targetPerson.FirstName} {targetPerson.LastName}");
-                    Console.WriteLine($"Adress: {targetPerson.YourAddress.StreetName} {targetPerson.YourAddress.PostalCode} {targetPerson.YourAddress.Country}");
-                    Console.WriteLine($"Telefon: {targetPerson.YourContactInformation.PhoneNumber}");
-                    Console.WriteLine($"E-post: {targetPerson.YourContactInformation.Email}");
+                Console.Clear();
+                Console.WriteLine($"Detaljer för person med ID {targetId}:");
+                Console.WriteLine($"Namn: {targetPerson.FirstName} {targetPerson.LastName}");
+                Console.WriteLine($"Adress: {targetPerson.YourAddress.StreetName} {targetPerson.YourAddress.PostalCode} {targetPerson.YourAddress.City} {targetPerson.YourAddress.Country}");
+                Console.WriteLine($"Telefon: {targetPerson.YourContactInformation.PhoneNumber}");
+                Console.WriteLine($"E-post: {targetPerson.YourContactInformation.Email}");
+                Console.ReadKey();
+                return true;
             }
 
                 else
                 {
                     Console.WriteLine($"Person med ID {targetId} hittades inte.");
+                    Console.ReadKey();
+                return false;
                 }
             
         }
@@ -112,6 +119,7 @@ public class PersonService : IPersonService
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
+            return false;
         }
     }
 
@@ -134,22 +142,22 @@ public class PersonService : IPersonService
                 response.Status = Enums.ServiceStatus.SUCCEDED;
                 response.Result = _personRepository._contactList;
 
-                Console.WriteLine("Skriv in numret på kontakten för att se detaljerad information: ");
-               
-                if (int.TryParse(Console.ReadLine(), out int targetId))
+                
+
+                Console.WriteLine("Skriv in numret på kontakten för att se detaljerad information eller tryck på valfri knapp för att avbryta: ");
+                var option = Console.ReadLine();
+
+                switch (option)
                 {
-                    ShowAContactFromList(targetId);
-                  
+                    case var _ when int.TryParse(option, out int targetId):
+                        ShowAContactFromList(targetId);
+                        break;
+
+                    default:
+                        Console.WriteLine("Går tillbaks till menyn");
+                        Console.ReadKey();
+                        break;
                 }
-
-                else
-                {
-                    Console.WriteLine("Ogiltigt val");
-                    
-                }
-
-                Console.ReadKey();
-
 
             }
             else
