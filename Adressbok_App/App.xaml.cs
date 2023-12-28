@@ -2,6 +2,7 @@
 
 using Adressbok_App.Mvvm.ViewModels;
 using Adressbok_App.Mvvm.Views;
+using Adressbok_Shared.Interface;
 using Adressbok_Shared.Models;
 using Adressbok_Shared.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,7 @@ public partial class App : Application
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton<MainWindow>();
                
-                services.AddTransient<Contact>();
+                services.AddTransient<IContact, Contact>();
                 services.AddSingleton<ContactService>();
 
                 services.AddTransient<ContactListViewModel>();
@@ -38,7 +39,7 @@ public partial class App : Application
                 services.AddTransient<RemoveContactWEmail>();
                 services.AddTransient<ContactRemoveListViewModel>();
 
-                services.AddTransient<FileService>();
+                services.AddTransient<IFileService, FileService>();
 
                 services.AddTransient<ContactDetailsViewModel>();
                 services.AddTransient<ContactDetailsView>();

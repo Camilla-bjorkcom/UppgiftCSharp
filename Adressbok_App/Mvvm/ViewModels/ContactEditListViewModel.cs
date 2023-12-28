@@ -1,4 +1,5 @@
 ﻿
+using Adressbok_Shared.Interface;
 using Adressbok_Shared.Models;
 using Adressbok_Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -14,7 +15,7 @@ public partial class ContactEditListViewModel : ObservableObject
     private readonly ContactService _contactService;
 
     [ObservableProperty]
-    private Contact _contactForm = new();
+    private IContact _contactForm = new Contact();
 
     public ContactEditListViewModel(IServiceProvider sp, ContactService contactService)
     {

@@ -1,4 +1,5 @@
 ﻿
+using Adressbok_Shared.Interface;
 using Adressbok_Shared.Models;
 using Adressbok_Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -26,7 +27,7 @@ public partial class ContactRemoveListViewModel : ObservableObject
 
 
     [ObservableProperty]
-    private Contact _contactForm = new();
+    private IContact _contactForm = new Contact();
 
 
     [RelayCommand]

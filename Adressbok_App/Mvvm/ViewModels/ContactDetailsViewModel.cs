@@ -1,5 +1,6 @@
 ﻿
 
+using Adressbok_Shared.Interface;
 using Adressbok_Shared.Models;
 using Adressbok_Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -15,7 +16,7 @@ public partial class ContactDetailsViewModel : ObservableObject
     private readonly ContactService _contactService;
 
     [ObservableProperty]
-    private Contact _contact = new Contact(); 
+    private IContact _contact = new Contact(); 
 
    
    
@@ -29,7 +30,7 @@ public partial class ContactDetailsViewModel : ObservableObject
 
    
     [RelayCommand]
-    public void NavigateToEdit(Contact contact)
+    public void NavigateToEdit(IContact contact)
     {
         _contactService.CurrentContact = contact;
         var mainViewModel = _sp.GetRequiredService<MainViewModel>();
@@ -37,7 +38,7 @@ public partial class ContactDetailsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void NavigateToList(Contact contact)
+    private void NavigateToList(IContact contact)
     {
         _contactService.CurrentContact = contact;
         var mainViewModel = _sp.GetRequiredService<MainViewModel>();

@@ -1,6 +1,7 @@
 ﻿
 
 
+using Adressbok_Shared.Interface;
 using Adressbok_Shared.Models;
 using Adressbok_Shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -18,17 +19,17 @@ public partial class ContactListViewModel : ObservableObject
     private readonly IServiceProvider _sp;
 
     [ObservableProperty]
-    private ObservableCollection<Contact> _contactList = [];
+    private ObservableCollection<IContact> _contactList = [];
 
     [ObservableProperty]
-    private Contact _contact = new();
+    private IContact _contact = new Contact();
 
     public ContactListViewModel(IServiceProvider sp, ContactService contactService)
     {
         _sp = sp;
         _contactService = contactService;
 
-        ContactList = new ObservableCollection<Contact>(_contactService.GetAll());
+        ContactList = new ObservableCollection<IContact>(_contactService.GetAll());
         _contact = _contactService.CurrentContact;
 
     }
@@ -36,7 +37,7 @@ public partial class ContactListViewModel : ObservableObject
     
 
     [RelayCommand] //För att skapa metoder som ska utföra någon form av aktivitet som ska kopplas till en knapptryckning
-    public void NavigateToAddPersonToList(Contact contact)
+    public void NavigateToAddPersonToList(IContact contact)
     {
         var mainViewModel = _sp.GetRequiredService<MainViewModel>();
         mainViewModel.CurrentViewModel = _sp.GetRequiredService<ContactAddListViewModel>();
@@ -54,7 +55,7 @@ public partial class ContactListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void NavigateToDetailsView(Contact contact)
+    private void NavigateToDetailsView(IContact contact)
     {
         _contactService.CurrentContact = contact;
         var mainViewModel = _sp.GetRequiredService<MainViewModel>();

@@ -1,6 +1,7 @@
 ﻿
 
 
+using Adressbok_Shared.Interface;
 using Adressbok_Shared.Models;
 using Adressbok_Shared.Services;
 using Newtonsoft.Json;
@@ -12,23 +13,20 @@ namespace Adressbok_Shared.Services;
 
 public class ContactService
 {
-    private readonly FileService _fileService;
+    private readonly IFileService _fileService;
 
-    public ContactService(FileService fileService)
+    public ContactService(IFileService fileService)
     {
         _fileService = fileService;
     }
 
-    public ContactService()
-    {
-    }
 
-    public List<Contact> _contacts = [];
+    public List<IContact> _contacts = [];
 
-    public Contact CurrentContact { get; set; } = null!;
+    public IContact CurrentContact { get; set; } = null!;
 
 
-    public bool Add(Contact contact)
+    public bool Add(IContact contact)
     {
         try
         {
@@ -51,14 +49,14 @@ public class ContactService
 
 
 
-    public IEnumerable<Contact> GetAll()
+    public IEnumerable<IContact> GetAll()
     {
         try
         {
             var content = _fileService.GetContentFromFile(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\contentApp1.json");
-            if (String.Empty != content)
+            if (!string.IsNullOrWhiteSpace(content))
             {
-                _contacts = JsonConvert.DeserializeObject<List<Contact>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
+                _contacts = JsonConvert.DeserializeObject<List<IContact>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
                 return _contacts;
             }
 
@@ -73,7 +71,7 @@ public class ContactService
         return default!;
     }
 
-    public bool Update(Contact contact)
+    public bool Update(IContact contact)
     {
         try
         {
