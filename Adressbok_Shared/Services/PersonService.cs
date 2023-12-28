@@ -96,23 +96,22 @@ public class PersonService : IPersonService
             var targetPerson = _personRepository._contactList.FirstOrDefault(x => x.Id == targetId);
             
             if (targetPerson != null)
-            {
-                Console.Clear();
+            {           
                 Console.WriteLine($"Detaljer för person med ID {targetId}:");
                 Console.WriteLine($"Namn: {targetPerson.FirstName} {targetPerson.LastName}");
                 Console.WriteLine($"Adress: {targetPerson.YourAddress.StreetName} {targetPerson.YourAddress.PostalCode} {targetPerson.YourAddress.City} {targetPerson.YourAddress.Country}");
                 Console.WriteLine($"Telefon: {targetPerson.YourContactInformation.PhoneNumber}");
                 Console.WriteLine($"E-post: {targetPerson.YourContactInformation.Email}");
-                Console.ReadKey();
                 return true;
             }
+      
 
-                else
-                {
-                    Console.WriteLine($"Person med ID {targetId} hittades inte.");
-                    Console.ReadKey();
+            else
+            {
+                Console.WriteLine($"Person med ID {targetId} hittades inte.");
                 return false;
-                }
+            }
+
             
         }
 
@@ -150,7 +149,9 @@ public class PersonService : IPersonService
                 switch (option)
                 {
                     case var _ when int.TryParse(option, out int targetId):
-                        ShowAContactFromList(targetId);
+                        Console.Clear();
+                        ShowAContactFromList(targetId);   
+                        Console.ReadKey();
                         break;
 
                     default:
