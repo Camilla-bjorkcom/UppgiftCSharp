@@ -9,6 +9,10 @@ namespace Adressbok_Shared.Interface;
 
 public interface IServiceResult
 {
+
+    /// <summary>
+    /// Represents the result of a service operation, including a result object and the status of the operation.
+    /// </summary>
     object Result { get; set; }
     ServiceStatus Status { get; set; }
 }

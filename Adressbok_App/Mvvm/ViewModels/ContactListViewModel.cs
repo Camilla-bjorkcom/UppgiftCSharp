@@ -14,7 +14,7 @@ namespace Adressbok_App.Mvvm.ViewModels;
 public partial class ContactListViewModel : ObservableObject
 {
 
-    private readonly ContactService _contactService;
+    private readonly IContactService _contactService;
 
     private readonly IServiceProvider _sp;
 
@@ -24,7 +24,13 @@ public partial class ContactListViewModel : ObservableObject
     [ObservableProperty]
     private IContact _contact = new Contact();
 
-    public ContactListViewModel(IServiceProvider sp, ContactService contactService)
+
+    /// <summary>
+    /// ViewModel class managing the contact list view and navigation in the application.
+    /// </summary>
+    /// <param name="sp">The service provider for dependency injection.</param>
+    /// <param name="contactService">The contact service for handling contact-related operations.</param>
+    public ContactListViewModel(IServiceProvider sp, IContactService contactService)
     {
         _sp = sp;
         _contactService = contactService;
@@ -39,9 +45,12 @@ public partial class ContactListViewModel : ObservableObject
 
     }
 
-    
 
-    [RelayCommand] //För att skapa metoder som ska utföra någon form av aktivitet som ska kopplas till en knapptryckning
+    /// <summary>
+    /// Navigates to the add contact view for a specific contact.
+    /// </summary>
+    /// <param name="contact">The contact to be added.</param>
+    [RelayCommand]
     public void NavigateToAddPersonToList(IContact contact)
     {
         var mainViewModel = _sp.GetRequiredService<MainViewModel>();
@@ -49,9 +58,9 @@ public partial class ContactListViewModel : ObservableObject
 
     }
 
-
-
-
+    /// <summary>
+    /// Navigates to the add contact view.
+    /// </summary>
     [RelayCommand]
     private void NavigateToAdd()
     {
@@ -59,6 +68,10 @@ public partial class ContactListViewModel : ObservableObject
         mainViewModel.CurrentViewModel = _sp.GetRequiredService<ContactAddListViewModel>();
     }
 
+    /// <summary>
+    /// Navigates to the details view for a specific contact.
+    /// </summary>
+    /// <param name="contact">The contact to view details for.</param>
     [RelayCommand]
     private void NavigateToDetailsView(IContact contact)
     {

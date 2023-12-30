@@ -12,12 +12,12 @@ namespace Adressbok_App.Mvvm.ViewModels;
 public partial class ContactEditListViewModel : ObservableObject
 {
     private readonly IServiceProvider _sp;
-    private readonly ContactService _contactService;
+    private readonly IContactService _contactService;
 
     [ObservableProperty]
     private IContact _contactForm = new Contact();
 
-    public ContactEditListViewModel(IServiceProvider sp, ContactService contactService)
+    public ContactEditListViewModel(IServiceProvider sp, IContactService contactService)
     {
         _sp = sp;
 
@@ -27,6 +27,10 @@ public partial class ContactEditListViewModel : ObservableObject
 
     }
 
+
+    /// <summary>
+    /// Navigates to the contact list view.
+    /// </summary>
     [RelayCommand]
     private void NavigateToList()
     {
@@ -36,7 +40,9 @@ public partial class ContactEditListViewModel : ObservableObject
 
 
 
-
+    /// <summary>
+    /// Updates a contact and navigates to the contact list view.
+    /// </summary>
     [RelayCommand]
     private void Update()
     {

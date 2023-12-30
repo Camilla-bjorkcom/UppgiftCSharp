@@ -1,13 +1,18 @@
 ﻿using Adressbok_Shared.Interface;
 using Adressbok_Shared.Services;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Diagnostics;
+using static System.Formats.Asn1.AsnWriter;
 
 
 namespace Adressbok_Shared.Repository;
 
 public class PersonRepository
 {
+    /// <summary>
+    /// Contact list to store contacts of type IPerson.
+    /// </summary>
     public List<IPerson> _contactList = new List<IPerson>();
 
     private readonly IFileService _fileService;
@@ -18,7 +23,11 @@ public class PersonRepository
     }
 
 
-
+    /// <summary>
+    /// Adds a person to the list and saves it to a data source.
+    /// </summary>
+    /// <param name="person">The person of type IPerson to be added.</param>
+    /// <returns>An IServiceResult indicating the status of the addition operation.</returns>
     public IServiceResult AddToList(IPerson person)
     {
 
@@ -43,7 +52,6 @@ public class PersonRepository
         {
             Debug.WriteLine(ex.Message);
             response.Status = Enums.ServiceStatus.FAILED;
-            //skickar med felmeddelandet
             response.Result = ex.Message;
 
         }
@@ -52,7 +60,10 @@ public class PersonRepository
 
     }
 
-
+    // <summary>
+    /// Retrieves a list of persons from a data source.
+    /// </summary>
+    /// <returns>An IEnumerable<IPerson> representing the list of persons; null if retrieval fails.</returns>
     public IEnumerable<IPerson> GetPersonList()
     {
 
@@ -74,6 +85,9 @@ public class PersonRepository
         return null!;
     }
 
+    /// <summary>
+    /// Saves the list of persons to a data source.
+    /// </summary>
     public void SaveToFile()
     {
         IServiceResult response = new ServiceResult();

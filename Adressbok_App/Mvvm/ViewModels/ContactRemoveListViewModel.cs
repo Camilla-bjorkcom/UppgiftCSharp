@@ -12,11 +12,17 @@ namespace Adressbok_App.Mvvm.ViewModels;
 public partial class ContactRemoveListViewModel : ObservableObject
 {
     private readonly IServiceProvider _sp;
-    private readonly ContactService _contactService;
+    private readonly IContactService _contactService;
 
     public string Input_Email { get; set; } = null!;
 
-    public ContactRemoveListViewModel(IServiceProvider sp, ContactService contactService)
+
+    /// <summary>
+    /// ViewModel class managing the contact removal view and navigation in the application.
+    /// </summary>
+    /// <param name="sp">The service provider for dependency injection.</param>
+    /// <param name="contactService">The contact service for handling contact-related operations.</param>
+    public ContactRemoveListViewModel(IServiceProvider sp, IContactService contactService)
     {
         _sp = sp;
 
@@ -25,11 +31,17 @@ public partial class ContactRemoveListViewModel : ObservableObject
         _contactForm = _contactService.CurrentContact;
     }
 
-
+    /// <summary>
+    /// Observable property for storing the contact to be removed.
+    /// </summary>
     [ObservableProperty]
     private IContact _contactForm = new Contact();
 
 
+    /// <summary>
+    /// Removes a contact based on the provided email and navigates to the contact list view.
+    /// </summary>
+    /// <param name="email">The email of the contact to be removed.</param>
     [RelayCommand]
     private void RemoveContact(string email)
     {
@@ -38,6 +50,10 @@ public partial class ContactRemoveListViewModel : ObservableObject
         mainViewModel.CurrentViewModel = _sp.GetRequiredService<ContactListViewModel>();
     }
 
+
+    /// <summary>
+    /// Navigates to the contact list view.
+    /// </summary>
     [RelayCommand]
     private void NavigateToList()
     {

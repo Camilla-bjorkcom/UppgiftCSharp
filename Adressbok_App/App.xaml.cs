@@ -25,7 +25,7 @@ public partial class App : Application
                 services.AddSingleton<MainWindow>();
                
                 services.AddTransient<IContact, Contact>();
-                services.AddSingleton<ContactService>();
+                services.AddSingleton<IContactService, ContactService>();
 
                 services.AddTransient<ContactListViewModel>();
                 services.AddTransient<ContactListView>();

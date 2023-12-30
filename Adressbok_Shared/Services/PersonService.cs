@@ -9,21 +9,23 @@ namespace Adressbok_Shared.Services;
 
 public class PersonService : IPersonService
 {
+    // Dependency injection for PersonRepository in the PersonService class.
     private readonly PersonRepository _personRepository;
+
+    // Constructor for PersonService, injecting a PersonRepository instance.
     public PersonService(PersonRepository personRepository)
     {
         _personRepository = personRepository;
-       
     }
 
-
+    //  Dependency injection for IPerson in the PersonService class.
     private readonly IPerson _person;
+
+    // Constructor for PersonService, injecting an IPerson instance.
     public PersonService(IPerson person)
     {
         _person = person;
     }
-
-
 
 
     public void AddNewContact()

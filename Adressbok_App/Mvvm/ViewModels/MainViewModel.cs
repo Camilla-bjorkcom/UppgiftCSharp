@@ -20,6 +20,10 @@ public partial class MainViewModel : ObservableObject
 
     private readonly IServiceProvider _sp;
 
+    /// <summary>
+    /// ViewModel class managing the main application view and navigation.
+    /// </summary>
+    /// <param name="sp">The service provider for dependency injection.</param>
     public MainViewModel(IServiceProvider sp)
     {
         _sp = sp;
