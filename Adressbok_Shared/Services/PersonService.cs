@@ -33,7 +33,6 @@ public class PersonService : IPersonService
         IServiceResult response = new ServiceResult();
         IPerson person = new PersonModel();
 
-
         Console.Write("Skriv in förnamn: ");
         person.FirstName = Console.ReadLine()!;
 
@@ -58,7 +57,16 @@ public class PersonService : IPersonService
         Console.Write("Skriv in land: ");
         person.YourAddress.Country = Console.ReadLine()!;
 
-        _personRepository.AddToList(person);
+        if (!string.IsNullOrEmpty(person.YourContactInformation.Email))
+        {
+            _personRepository.AddToList(person);
+        }
+
+        else
+        {
+            Console.WriteLine("Något blev fel, du måste ange en emailadress");
+            Console.ReadKey();
+        }
 
     }
 
@@ -96,9 +104,9 @@ public class PersonService : IPersonService
         try
         {
             var targetPerson = _personRepository._contactList.FirstOrDefault(x => x.Id == targetId);
-            
+
             if (targetPerson != null)
-            {           
+            {
                 Console.WriteLine($"Detaljer för person med ID {targetId}:");
                 Console.WriteLine($"Namn: {targetPerson.FirstName} {targetPerson.LastName}");
                 Console.WriteLine($"Adress: {targetPerson.YourAddress.StreetName} {targetPerson.YourAddress.PostalCode} {targetPerson.YourAddress.City} {targetPerson.YourAddress.Country}");
@@ -106,7 +114,7 @@ public class PersonService : IPersonService
                 Console.WriteLine($"E-post: {targetPerson.YourContactInformation.Email}");
                 return true;
             }
-      
+
 
             else
             {
@@ -114,7 +122,7 @@ public class PersonService : IPersonService
                 return false;
             }
 
-            
+
         }
 
         catch (Exception ex)
@@ -143,7 +151,7 @@ public class PersonService : IPersonService
                 response.Status = Enums.ServiceStatus.SUCCEDED;
                 response.Result = _personRepository._contactList;
 
-                
+
 
                 Console.WriteLine("Skriv in numret på kontakten för att se detaljerad information eller tryck på valfri knapp för att avbryta: ");
                 var option = Console.ReadLine();
@@ -152,7 +160,7 @@ public class PersonService : IPersonService
                 {
                     case var _ when int.TryParse(option, out int targetId):
                         Console.Clear();
-                        ShowAContactFromList(targetId);   
+                        ShowAContactFromList(targetId);
                         Console.ReadKey();
                         break;
 
@@ -175,7 +183,6 @@ public class PersonService : IPersonService
         {
             Debug.WriteLine(ex.Message);
             response.Status = Enums.ServiceStatus.FAILED;
-            //skickar med felmeddelandet
             response.Result = ex.Message;
 
         }

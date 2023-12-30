@@ -45,8 +45,6 @@ public class ContactService : IContactService
         return false;
     }
 
-
-
     public IEnumerable<IContact> GetAll()
     {
         try
@@ -91,8 +89,6 @@ public class ContactService : IContactService
             Debug.WriteLine(ex.Message);
         }
         return false;
-
-
     }
 
     public bool Remove(string email)
