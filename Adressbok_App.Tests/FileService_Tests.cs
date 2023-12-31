@@ -1,10 +1,5 @@
 ﻿using Adressbok_Shared.Interface;
 using Adressbok_Shared.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Adressbok_App.Tests;
 

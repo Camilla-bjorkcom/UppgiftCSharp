@@ -1,9 +1,8 @@
 ﻿using Adressbok_Shared.Interface;
 using Adressbok_Shared.Services;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Diagnostics;
-using static System.Formats.Asn1.AsnWriter;
+
 
 
 namespace Adressbok_Shared.Repository;
@@ -36,8 +35,9 @@ public class PersonRepository
         {
             if (!_contactList.Any(x => x.YourContactInformation.Email == person.YourContactInformation.Email))
             {
-                _contactList.Add(person);
+                
                 person.Id = _contactList.Count + 1;
+                _contactList.Add(person);
                 SaveToFile();
                 response.Status = Enums.ServiceStatus.SUCCEDED;
             }
@@ -69,7 +69,7 @@ public class PersonRepository
 
         try
         {
-            var content = _fileService.GetContentFromFile(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
+            var content = _fileService.GetContentFromFile("content.json");
             if (!string.IsNullOrEmpty(content))
             {
                 _contactList = JsonConvert.DeserializeObject<List<IPerson>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
@@ -94,7 +94,7 @@ public class PersonRepository
         _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList, new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All
-        }), @"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\content.json");
+        }), "content.json");
 
         response.Status = Enums.ServiceStatus.SUCCEDED;
 

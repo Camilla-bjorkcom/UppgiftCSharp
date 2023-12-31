@@ -1,5 +1,4 @@
 ﻿using Adressbok_Shared.Interface;
-using Adressbok_Shared.Repository;
 
 
 namespace Adressbok_Shared.Services;
@@ -13,9 +12,6 @@ public class MenuService : IMenuService
     {
         _personService = personService;
     }
-
-  
-
     public void ShowMainMenu()
     {
 

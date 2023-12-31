@@ -1,7 +1,4 @@
 ﻿
-
-using Adressbok_Shared.Models;
-
 namespace Adressbok_Shared.Interface;
 
 public interface IPerson

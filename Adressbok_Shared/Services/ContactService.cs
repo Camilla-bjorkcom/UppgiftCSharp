@@ -1,7 +1,4 @@
-﻿
-
-
-using Adressbok_Shared.Interface;
+﻿using Adressbok_Shared.Interface;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -49,7 +46,7 @@ public class ContactService : IContactService
     {
         try
         {
-            var content = _fileService.GetContentFromFile(@"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\contentApp2.json");
+            var content = _fileService.GetContentFromFile("contentApp.json");
             if (!string.IsNullOrWhiteSpace(content))
             {
                 _contacts = JsonConvert.DeserializeObject<List<IContact>>(content, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })!;
@@ -122,7 +119,7 @@ public class ContactService : IContactService
             _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contacts, new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.All
-            }), @"C:\IT_kurser\Kurser\Webbutveckling-dotnet\CSharp\C-SharpUppgift\contentApp2.json");
+            }), "contentApp.json");
             return true;
         }
         catch (Exception ex)

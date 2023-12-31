@@ -1,5 +1,4 @@
 ﻿using Adressbok_Shared.Interface;
-using Adressbok_Shared.Models;
 using Adressbok_Shared.Services;
 using Moq;
 
@@ -26,18 +25,6 @@ public class ContactService_Tests
 
         //Assert
         Assert.True(result);
-
-    }
-
-    [Fact]
-    public void GetAllShould_GetAllContactsInList_ThenReturnListOfContacts()
-    {
-        // Arrange
-
-
-        // Act
-
-        //Assert
 
     }
 }

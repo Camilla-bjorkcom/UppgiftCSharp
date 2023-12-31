@@ -1,12 +1,8 @@
-﻿
-
-using Adressbok_Shared.Interface;
-using Adressbok_Shared.Models;
+﻿using Adressbok_Shared.Interface;
 using Adressbok_Shared.Repository;
 using Adressbok_Shared.Services;
 using Moq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace Konsollapp_adressbok.Tests;
 

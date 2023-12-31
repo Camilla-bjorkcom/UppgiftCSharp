@@ -82,9 +82,6 @@ public class PersonService : IPersonService
             _personRepository._contactList.RemoveAll(person => person.YourContactInformation.Email == targetEmail);
             _personRepository.SaveToFile();
             response.Status = Enums.ServiceStatus.SUCCEDED;
-            Console.ReadKey();
-
-
         }
 
         catch (Exception ex)
